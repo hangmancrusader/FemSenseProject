@@ -3,7 +3,16 @@ const  mongoose = require("mongoose");
 
 const physicalactivitySchema = mongoose.Schema(
     {
-
+        physicalactivityId: {
+            type: Number,
+            required: true,
+            unique: true
+        },
+        description:
+        { 
+            type: [String], 
+            enum: ["gym", "running", "sex", "dancing", "swimming", "meditation", "cycling", "no exercise" ] 
+        }  
     }
 )
 
