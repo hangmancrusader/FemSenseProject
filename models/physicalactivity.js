@@ -11,7 +11,7 @@ const physicalactivitySchema = mongoose.Schema(
         description:
         { 
             type: [String], 
-            enum: ["gym", "running", "sex", "dancing", "swimming", "meditation", "cycling", "no exercise" ] 
+            enum: ["gym", "running", "intercourse", "dancing", "swimming", "meditation", "cycling", "no exercise" ] 
         }  
     }
 )

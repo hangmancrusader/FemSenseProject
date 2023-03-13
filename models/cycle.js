@@ -5,6 +5,7 @@ const cycleSchema = mongoose.Schema(
        userID:
        {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         required:true,
       l
        },
@@ -12,51 +13,40 @@ const cycleSchema = mongoose.Schema(
        {
         type: mongoose.Schema.Types.ObjectId,
         required:true,
-       
+       },
+       periodID:
+       {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required:true,
        },
        start_date:
        {
-
+        type: Date,
+        required: true
        },
        end_date:
        {
-
+        type: Date,
+        required: true
        },
        lutealphase:
        {
         type: Number,
         required: true,
-        //set a default value between 14-18 days and check that value shouldn't exceed the range
+        max:17
        },
-       //needs period collection ref - everyc cycle has period
        cyclelength:
        {
         type: Number,
         required: true,
-        default: 0
-        //set a check that length should exceed 45 days 
+        default: 0,
+        min: 27,
+        max: 35
        }
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-        /* "id":"period_123",
-"start_date":"2023-02-14",
-"end_date":"2023-02-19",
-"length":6,
-"symptoms":
-[{"name":"cramps","severity":7,"notes":"Took pain reliever"},{"name":"headache","severity":5,"notes":""},{"name":"bloating","severity":3,"notes":""}],
-"medications":[{"name":"ibuprofen","dosage":"200mg",
-"frequency":"as needed",
-"notes":"Take with food"}*/
+
     }
 )
 
 
-module.exports =mongoose.model("cycleSchema", cycleSchema);
+module.exports =mongoose.model("Cycle", cycleSchema);
