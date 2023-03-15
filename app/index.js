@@ -14,6 +14,7 @@ const cycleRoutes = require('./routes/cycle');
 const medicinereminderRoutes = require('./routes/medicinereminder');
 const notesRoutes = require('./routes/notes');
 const physicalActivityRoutes = require('./routes/physicalactivity');
+const moodtrackerRoutes = require('./routes/mood');
 
 //defining routes that handle req to given endpoints
 app.use("/medicinereminder", medicinereminderRoutes);
@@ -23,6 +24,7 @@ app.use("/user", userRoutes);
 app.use("/symptoms", symptomsRoutes);
 app.use("/notes", notesRoutes);
 app.use("/physicalactivity", physicalActivityRoutes);
+app.use("/moodtracker", moodtrackerRoutes);
 
  
 module.exports = app;
