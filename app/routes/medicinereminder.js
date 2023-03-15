@@ -59,7 +59,7 @@ router.delete(("/:reminderID"), async(req,res)=>{
           res.status(404).json({message: "Reminder not found"});
         }
         res.status(200).json(reminder);
-      }catch(err)
+      }catch(error)
       {
         res.status(500).json({ error: "Unable to delete reminder" });
       }

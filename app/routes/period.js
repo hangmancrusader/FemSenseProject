@@ -40,11 +40,53 @@ router.delete(("/:periodID"), async(req,res)=>{
           res.status(404).json({message: "Period does not exist"});
         }
         res.status(200).json(period);
-      }catch(err)
+      }catch(error)
       {
-        res.status(500).json({ error: "Unable to delete period" });
+        console.log(error);
+        res.status(500).json({ message: "Unable to delete period" });
       }
     
 });
 router.put();
+router.patch("/updatedate/:periodID", async(req,res) =>{
+try{
+  const period = await Period.findById(req.params.periodID);
+  var isSuccessful = false;
+  if(!period)
+  {
+    return res.status(404).json({message: "Period not found"},isSuccessful);
+  }
+  period.start_date = req.body.start_date;
+  period.end_date = req.body.end_date;
+
+  await period.save();
+  isSuccessful = true;
+  res.json(201).json(isSuccessful, period.start_date, period.end_date);
+}catch(error)
+{
+  console.log(error);
+  res.status(500).json({message: "Could not edit dates"})
+}
+});
+
+router.patch(("/:periodID"), async(req,res)=>{
+ //could be implemented via query string
+  try{ 
+  const period = await Period.findById(req.params.periodID);
+  var isSuccessful = false;
+  if(!period)
+  {
+    return res.status(404).json({message: "Period not found"},isSuccessful);
+  }
+  period.periodlength = req.body.periodlength;
+  await period.save();
+  isSuccessful = true;
+  res.json(201).json(isSuccessful, period.periodlength);
+}
+catch(error)
+{
+  console.log.error(error);
+  res.status(500).json({message: "Could not edit period length"});
+}
+});
 module.exports = router;
