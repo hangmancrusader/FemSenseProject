@@ -49,7 +49,8 @@ router.delete(("/:flowID"), async(req,res)=>{
     
 });
 
-//handler if initial decription was EMPTY
+//handler if initial decription field i EMPTY
+//description field holds only SINGLE ENUM value
 router.patch("/updatemenstrualflow/:flowID", async(req,res) =>{
 try{
   const menstraulflow = await menstraulflow.findById(req.params.flowID);

@@ -45,5 +45,23 @@ router.delete(("/:notesID"), async(req,res)=>{
       }
     
 });
-router.patch();
+router.patch("/editnote/:noteID", async(req,res) =>{
+  try{
+  const notes = await Notes.findById(req.params.noteID);
+  var isSuccessful = false;
+  if(!notes)
+  {
+    return res.status(404).json({message: "Note not found"},isSuccessful);
+  }
+  notes.description = req.body.description;
+
+  await notes.save();
+  isSuccessful = true;
+  res.status(201).json({isSuccessful, description:notes.description});
+}catch(error)
+{
+  console.log(error);
+  res.status(500).json({message: "Could not edit notes"})
+}
+});
 module.exports = router;
