@@ -45,4 +45,5 @@ router.delete(("/:notesID"), async(req,res)=>{
       }
     
 });
+router.patch();
 module.exports = router;

@@ -43,4 +43,5 @@ router.delete(("/:phyID"), async(req,res)=>{
       }
     
 });
+router.patch()
 module.exports = router;

@@ -47,7 +47,6 @@ router.delete(("/:periodID"), async(req,res)=>{
       }
     
 });
-router.put();
 router.patch("/updatedate/:periodID", async(req,res) =>{
 try{
   const period = await Period.findById(req.params.periodID);
@@ -64,28 +63,28 @@ try{
   res.json(201).json(isSuccessful, period.start_date, period.end_date);
 }catch(error)
 {
-  console.log(error);
+  console.error(error);
   res.status(500).json({message: "Could not edit dates"})
 }
 });
 
-router.patch(("/:periodID"), async(req,res)=>{
+router.patch(("/editlength/:periodID"), async(req,res)=>{
  //could be implemented via query string
   try{ 
   const period = await Period.findById(req.params.periodID);
   var isSuccessful = false;
   if(!period)
   {
-    return res.status(404).json({message: "Period not found"},isSuccessful);
+    return res.status(404).json({message: "Period not found", isSuccessful});
   }
   period.periodlength = req.body.periodlength;
   await period.save();
   isSuccessful = true;
-  res.json(201).json(isSuccessful, period.periodlength);
+  res.json(201).json({isSuccessful, length:period.length});
 }
 catch(error)
 {
-  console.log.error(error);
+  console.error(error);
   res.status(500).json({message: "Could not edit period length"});
 }
 });

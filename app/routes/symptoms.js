@@ -43,4 +43,5 @@ router.delete(("/:sympID"), async(req,res)=>{
       }
     
 });
+router.patch();
 module.exports = router;
