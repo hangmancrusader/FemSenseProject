@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 //import model
-const MenstraulFlow = require('../../models/period');
+const MenstraulFlow = require('../../models/menstrualflow');
 
 //route handler for /menstraulflow
 
