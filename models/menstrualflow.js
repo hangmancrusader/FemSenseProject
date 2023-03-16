@@ -9,7 +9,7 @@ const menstrualflowSchema = mongoose.Schema(
         },
         description:
         { 
-            type: [String], 
+            type: String, 
             enum: [ "heavy","spotting","light", "medium","clots","jelly"] 
         } 
     }

@@ -15,6 +15,9 @@ const medicinereminderRoutes = require('./routes/medicinereminder');
 const notesRoutes = require('./routes/notes');
 const physicalActivityRoutes = require('./routes/physicalactivity');
 const moodtrackerRoutes = require('./routes/mood');
+const menstraulflowRoutes = require('./routes/menstrualflow');
+const insightsRoutes = require('./routes/insights');
+const daytrackRoutes = require('./routes/daytrack');
 
 //defining routes that handle req to given endpoints
 app.use("/medicinereminder", medicinereminderRoutes);
@@ -25,6 +28,9 @@ app.use("/symptoms", symptomsRoutes);
 app.use("/notes", notesRoutes);
 app.use("/physicalactivity", physicalActivityRoutes);
 app.use("/moodtracker", moodtrackerRoutes);
+app.use("/menstrualflow", menstraulflowRoutes);
+app.use("/insights", insightsRoutes);
+app.use("/daytracker", daytrackRoutes);
 
  
 module.exports = app;
