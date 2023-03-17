@@ -6,7 +6,7 @@ const periodSchema = mongoose.Schema(
        {
         type: mongoose.Schema.Types.ObjectId,
         required:true,
-      l
+      
        },
        
        start_date:

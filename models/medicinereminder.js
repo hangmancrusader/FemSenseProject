@@ -10,7 +10,7 @@ const medicinereminderSchema = mongoose.Schema(
             type: [String], 
             enum: ["Monday", "Wednesday", "Tuesday","Thursday","Saturday","Sunday" ],
         },
-        remindertime: {type: Date.now, required: true, default: null}
+        remindertime: {type: Date, required: true, default: null}
 
     }
 )

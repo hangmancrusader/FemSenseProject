@@ -7,7 +7,11 @@ const PhysicalActivity  = require('../../models/physicalactivity');
 router.post(("/"), async(req,res)=>{
     
     try {
-      const physicalactivity = new PhysicalActivity(req.body);
+      console.log(req.body.physicalactivityId)
+      const physicalactivity = new PhysicalActivity({
+        physicalactivityId: req.body.physicalactivityId,
+        description: req.body.description,
+      });
       await physicalactivity.save();
       res.status(201).json({ message: "Activities logged successfully", physicalactivity });
     } catch (error) {
@@ -43,5 +47,5 @@ router.delete(("/:phyID"), async(req,res)=>{
       }
     
 });
-router.patch()
+
 module.exports = router;

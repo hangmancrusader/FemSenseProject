@@ -7,7 +7,7 @@ const cycleSchema = mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required:true,
-      l
+      
        },
        cycleID:
        {

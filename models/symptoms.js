@@ -2,6 +2,7 @@ const  mongoose = require("mongoose");
 
 const symptomsSchema = mongoose.Schema(
     {
+        _symptomId: mongoose.Schema.Types.ObjectId,
         symptomId: {
             type: Number,
             required: true,

@@ -5,9 +5,13 @@ const Symptoms  = require('../../models/symptoms');
 
 //route handler for /symptoms
 router.post(("/"), async(req,res)=>{
-    
     try {
-      const symptoms = new Symptoms(req.body);
+      //console.log(req.body.symptomId)
+      const symptoms = new Symptoms({
+        symptomId: req.body.symptomId,
+        description: req.body.description
+      });
+      console.log(symptoms.description);
       await symptoms.save();
       res.status(201).json({ message: "Symptoms logged successfully", symptoms });
     } catch (error) {
@@ -17,6 +21,7 @@ router.post(("/"), async(req,res)=>{
 });
 
 router.get(("/:sympID"),async(req,res)=>{
+  
     try {
         const symptoms = await Symptoms.findById(req.params.sympID);
         if (!symptoms) {
@@ -43,5 +48,5 @@ router.delete(("/:sympID"), async(req,res)=>{
       }
     
 });
-router.patch();
+
 module.exports = router;
