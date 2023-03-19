@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 //import models 
 const Cycle  =  require('../../models/cycle');
-<<<<<<< HEAD
-=======
 const Period=require('../../models/period');
 // Create a new period for the cycle
 router.post('/:cycleId/logperioddates', async (req, res) => {
@@ -76,5 +74,4 @@ router.post('/:cycleId/logperioddates', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
->>>>>>> 6e98342 (Bilal)
 module.exports = router;

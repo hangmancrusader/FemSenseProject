@@ -1,10 +1,5 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< HEAD
-
-//import models
-const User = require('../../models/user')//../parentdirectory../changeparentdir
-=======
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 //import models
@@ -170,5 +165,4 @@ router.post('/login', async (req, res) => {
     res.json({ token });
   });
   
->>>>>>> 6e98342 (Bilal)
 module.exports = router;
