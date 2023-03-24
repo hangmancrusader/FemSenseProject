@@ -6,7 +6,7 @@ const medicinereminderSchema = mongoose.Schema(
         reminderID: {
             type: Number, required: true, unique: true
         },
-        frequeny:{
+        frequency:{
             type: [String], 
             enum: ["Monday", "Wednesday", "Tuesday","Thursday","Saturday","Sunday" ],
         },

@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 //import model
 const MenstraulFlow = require('../../models/menstrualflow');
-
+//middleware
+router.use(express.json());
 //route handler for /menstraulflow
 
 router.get(("/:flowID"),async(req,res)=>{
@@ -22,9 +23,11 @@ router.get(("/:flowID"),async(req,res)=>{
 router.post(("/"), async(req,res)=>{
     
     try {
-      const menstraulflow = new MenstraulFlow(req.body);
-      await menstraulflow.save();
-      res.status(201).json({ message: "Data logged successfully", menstraulflow });
+      const{menstrualflowID, description}=req.body;
+      const flow = new MenstraulFlow({menstrualflowID, description});
+      console.log(flow);
+      await flow.save();
+      res.status(201).json({ message: "Data logged successfully", id:menstrualflowID, description:description});
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Unable to log data" });

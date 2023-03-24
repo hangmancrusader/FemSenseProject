@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
-
+//middleware
+router.use(express.json());
 //import models 
-const medicinereminder = require('../../models/medicinereminder');
+const Medicinereminder = require('../../models/medicinereminder');
 
 //route handlers for /medicinereminder
 router.post(("/"), async(req,res)=>{
     
   try {
-    const reminder = new medicinereminder(req.body);
+    const {medicine, reminderID,frequency,remindertime} = req.body;
+    console.log(medicine, reminderID,frequency,remindertime);
+    const reminder = new Medicinereminder({medicine, reminderID,frequency,remindertime});
     await reminder.save();
-    res.status(201).json({ message: "Reminder created successfully", reminder });
+    res.status(201).json({ message: "Reminder created successfully",med:medicine,freq:frequency,time:remindertime });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Unable to create reminder" });

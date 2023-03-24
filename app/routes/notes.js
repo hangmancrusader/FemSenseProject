@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 //import models 
 const Notes = require('../../models/notes');
-
+//middleware
+router.use(express.json());
 //route handlers for /notes
 router.post(("/"), async(req,res)=>{
     
     try {
-      const notes = new Notes(req.body);
+      const {notesId, description}= new Notes(req.body);
+      console.log(notesId,description);
+      const notes= new Notes({notesId, description});
       await notes.save();
-      res.status(201).json({ message: "Notes posted successfully", notes });
+      res.status(201).json({ message: "Notes posted successfully", id:notesId,notes: description });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to post notes" });

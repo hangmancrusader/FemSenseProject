@@ -2,18 +2,17 @@ const express = require('express');
 const router = express.Router();
 //import models 
 const PhysicalActivity  = require('../../models/physicalactivity');
-
+//middleware to parse json body of POSTMAN request
+router.use(express.json());
 //route handler for /physicalactivity
 router.post(("/"), async(req,res)=>{
     
     try {
-      console.log(req.body.physicalactivityId)
-      const physicalactivity = new PhysicalActivity({
-        physicalactivityId: req.body.physicalactivityId,
-        description: req.body.description,
-      });
-      await physicalactivity.save();
-      res.status(201).json({ message: "Activities logged successfully", physicalactivity });
+      const{ physicalactivityId, description} = req.body;
+      console.log(physicalactivityId,description);
+      const activity= new PhysicalActivity({physicalactivityId, description});
+      await activity.save();
+      res.status(201).json({ message: "Activities logged successfully", activityId:physicalactivityId, description:description });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to log activity" });

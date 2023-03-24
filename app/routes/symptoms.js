@@ -2,18 +2,15 @@ const express = require('express');
 const router = express.Router();
 //import models 
 const Symptoms  = require('../../models/symptoms');
-
+router.use(express.json());
 //route handler for /symptoms
 router.post(("/"), async(req,res)=>{
     try {
-      //console.log(req.body.symptomId)
-      const symptoms = new Symptoms({
-        symptomId: req.body.symptomId,
-        description: req.body.description
-      });
-      console.log(symptoms.description);
+      const{ symptomId, description} = req.body;
+      console.log(symptomId,description);
+      const symptoms = new Symptoms({symptomId, description});
       await symptoms.save();
-      res.status(201).json({ message: "Symptoms logged successfully", symptoms });
+      res.status(201).json({ message: "Symptoms logged successfully", symptomId:symptomId,description:description });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to log symptoms" });

@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+//middleware
+router.use(express.json());
 //import models 
 const MoodTracker = require('../../models/mood');
 
@@ -7,9 +9,11 @@ const MoodTracker = require('../../models/mood');
 router.post(("/"), async(req,res)=>{
     
     try {
-      const moodtracker = new MoodTracker(req.body);
+      const{moodId,description} = req.body;
+      const moodtracker = new MoodTracker({moodId,description});
+      console.log(moodtracker);
       await moodtracker.save();
-      res.status(201).json({ message: "Moods logged successfully", moodtracker });
+      res.status(201).json({ message: "Moods logged successfully", id:moodId,description:description });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to log moods" });
