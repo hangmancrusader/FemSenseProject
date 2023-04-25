@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const {authenticateToken}=require('../../Middleware/authmiddle');
+//const {authenticateToken}=require('../../Middleware/authmiddle');
 //import models
 const User = require('../../models/user')//../parentdirectory../changeparentdir
 const handleErrors=(err)=>
