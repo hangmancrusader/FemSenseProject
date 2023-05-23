@@ -23,7 +23,7 @@ router.post(("/"), async(req,res)=>{
 
 router.get(("/:notesID"),async(req,res)=>{
     try {
-        const notes = await Notes.findById(req.params.notesID);
+        const notes = await Notes.find({"notesId":req.params.notesID});
         if (!notes) {
           res.status(404).json({ message: "Notes not found" });
         }
@@ -36,7 +36,7 @@ router.get(("/:notesID"),async(req,res)=>{
 
 router.delete(("/:notesID"), async(req,res)=>{
     try{ 
-        const notes= await Notes.findByIdAndDelete(req.params.notesID);
+        const notes= await Notes.findOneAndRemove(req.params.notesID);
         if(!notes)
         {
           res.status(404).json({message: "Notes does not exist"});

@@ -21,7 +21,7 @@ router.post(("/"), async(req,res)=>{
 
 router.get(("/:phyID"),async(req,res)=>{
     try {
-        const physicalactivity = await PhysicalActivity.findById(req.params.phyID);
+        const physicalactivity = await PhysicalActivity.find({"physicalactivityId":req.params.phyID});
         if (!physicalactivity) {
           res.status(404).json({ message: "Activities not found" });
         }
@@ -34,7 +34,7 @@ router.get(("/:phyID"),async(req,res)=>{
 
 router.delete(("/:phyID"), async(req,res)=>{
     try{ 
-        const physicalactivity= await PhysicalActivity.findByIdAndDelete(req.params.phyID);
+        const physicalactivity= await PhysicalActivity.findOneAndRemove(req.params.phyID);
         if(!physicalactivity)
         {
           res.status(404).json({message: "Activity  does not exist"});
