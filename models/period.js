@@ -4,9 +4,11 @@ const periodSchema = mongoose.Schema(
     {
        periodID:
        {
-        type: mongoose.Schema.Types.ObjectId,
+        //type: mongoose.Schema.Types.ObjectId,
+        type:Number,
         required:true,
-      
+        unique:true
+        
        },
        
        start_date:
