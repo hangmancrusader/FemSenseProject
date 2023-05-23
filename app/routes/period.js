@@ -7,7 +7,11 @@ const Period = require('../../models/period');
 
 router.get(("/:periodID"),async(req,res)=>{
     try {
+<<<<<<< HEAD
         const period = await Period.find({"periodID":req.params.periodID});
+=======
+        const period = await Period.findById(req.params.periodID);
+>>>>>>> e4808a9e8ec38a96ff723550ea1020419e3e667e
         if (!period) {
           res.status(404).json({ message: "Period not found" });
         }
@@ -34,7 +38,11 @@ router.post(("/"), async(req,res)=>{
 
 router.delete(("/:periodID"), async(req,res)=>{
     try{ 
+<<<<<<< HEAD
         const period = await Period.findOneAndRemove(req.params.periodID);
+=======
+        const period = await Period.findByIdAndDelete(req.params.periodID);
+>>>>>>> e4808a9e8ec38a96ff723550ea1020419e3e667e
         if(!period)
         {
           res.status(404).json({message: "Period does not exist"});

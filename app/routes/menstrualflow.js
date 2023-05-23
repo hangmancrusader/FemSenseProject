@@ -8,7 +8,11 @@ router.use(express.json());
 
 router.get(("/:flowID"),async(req,res)=>{
     try {
+<<<<<<< HEAD
         const menstraulflow = await MenstraulFlow.find({"menstrualflowID":req.params.flowID});
+=======
+        const menstraulflow = await MenstraulFlow.findById(req.params.flowID);
+>>>>>>> e4808a9e8ec38a96ff723550ea1020419e3e667e
         if (!menstraulflow) {
           res.status(404).json({ message: "Data not found" });
         }
@@ -38,7 +42,11 @@ router.post(("/"), async(req,res)=>{
 
 router.delete(("/:flowID"), async(req,res)=>{
     try{ 
+<<<<<<< HEAD
         const menstraulflow = await MenstraulFlow.findOneAndRemove(req.params.flowID);
+=======
+        const menstraulflow = await MenstraulFlow.findByIdAndDelete(req.params.flowID);
+>>>>>>> e4808a9e8ec38a96ff723550ea1020419e3e667e
         if(!menstraulflow)
         {
           res.status(404).json({message: "Data does not exist"});

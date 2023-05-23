@@ -12,13 +12,22 @@ const cycleSchema = mongoose.Schema(
        cycleID:
        {
         type: mongoose.Schema.Types.ObjectId,
+<<<<<<< HEAD
         required:true,
+=======
+        
+>>>>>>> e4808a9e8ec38a96ff723550ea1020419e3e667e
        },
        periodID:
        {
         type: mongoose.Schema.Types.ObjectId,
+<<<<<<< HEAD
         ref: 'user',
         required:true,
+=======
+        ref: 'period',
+        required:false,
+>>>>>>> e4808a9e8ec38a96ff723550ea1020419e3e667e
        },
        start_date:
        {
