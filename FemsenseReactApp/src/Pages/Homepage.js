@@ -17,7 +17,7 @@ import ButtonSignUp from '../Component/ButtonSignUp';
 function Homepage() {
   return (
     <div>
-    <ReactMenu />
+    {/* <ReactMenu /> */}
     <Typography />
     <ColorButtons />
     <TextMobileStepper />

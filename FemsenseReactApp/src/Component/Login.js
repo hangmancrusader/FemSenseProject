@@ -13,12 +13,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import evalogo from "./Images/Girl 2.jpg";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false); // Snackbar state
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -33,19 +36,24 @@ function Login() {
       const response = await axios.post("http://localhost:3000/user/login", {
         email,
         password,
+      }) .then((result) => {
+        console.log(result); // Handle the response as per your requirements
+        setOpen(true); // Show the Snackbar
+        window.location.href = "/periodtracker"// Redirect to the desired page after successful login
+        
+      })
+      .catch((err) => {
+        console.log(err.message)
+        alert("Invalid Email or password");
+        //setSignupError("User Already Exist");
       });
   
       console.log(response.data); // Handle the response as per your requirements
   
       // Redirect to the desired page after successful login
-      navigate("/dashboard");
+      
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        alert("Incorrect password"); // Display error message for incorrect password
-      } else {
-         alert("Login failed");
-        // Handle other login errors, show appropriate error message, etc.
-      }
+      
     }
   };
 
@@ -78,6 +86,18 @@ function Login() {
             fontSize: "10px",
           }}
         >
+          
+<Snackbar open={open} autoHideDuration={40000} onClose={() => setOpen(false)}>
+  <MuiAlert
+    elevation={6}
+    variant="filled"
+    severity="success"
+    onClose={() => setOpen(false)}
+    
+  >
+    Sign In Successful
+  </MuiAlert>
+</Snackbar>;
           <Avatar sx={{ m: 1, width: "100px", height: "100px" }} src={evalogo} />
           <Typography component="h1" variant="h5">
             Login

@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import evalogo from "./Images/Girl 2.jpg";
 
 function SignUp() {
@@ -21,6 +23,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [signupError, setSignupError] = useState("");
+  const [open, setOpen] = useState(false); // Snackbar state
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,25 +47,38 @@ function SignUp() {
 
     try {
       const response = await axios.post("http://localhost:3000/user/signupadmin", {
-        name,
-        email,
+        email, 
         password,
-      });
-
-      console.log(response.data); // Assuming the API response contains relevant information
-
-      // Reset the form
-      setName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setSignupError("");
+        name
+        
+      })
+      .then((result) => {
+        console.log(result)
+        window.location.href = "/login"
+        setOpen(true);
+      })
+      .catch((err) => {
+        console.log(err.message)
+        alert("User Already Exist");
+        //setSignupError("User Already Exist");
+      })
+      // if()
+      // console.log(response); // Assuming the API response contains relevant information
+      // setPassword("");
+      // setConfirmPassword("");
+      // // Reset the form
+      // setName("");
+      // setEmail("");
+      // setPassword("");
+      // setConfirmPassword("");
+      // setSignupError("");
 
       // Redirect to the login page
-      window.location.href = "/login";
+      //;
     } catch (error) {
-      console.error(error);
-      setSignupError("An error occurred while signing up. Please try again later.");
+      console.log("Hello");
+      setSignupError("Error occured");
+      
     }
   };
 
@@ -95,6 +111,17 @@ function SignUp() {
             fontSize: "10px",
           }}
         >
+          <Snackbar open={open} autoHideDuration={40000} onClose={() => setOpen(false)}>
+  <MuiAlert
+    elevation={6}
+    variant="filled"
+    severity="success"
+    onClose={() => setOpen(false)}
+    
+  >
+    Sign Up Successful
+  </MuiAlert>
+</Snackbar>;
           <Avatar sx={{ m: 1, width: "100px", height: "100px" }} src={evalogo} />
 
           <Typography component="h1" variant="h5">
