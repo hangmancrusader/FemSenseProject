@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { Avatar } from "@mui/material";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,33 +12,67 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 import evalogo from "./Images/Girl 2.jpg";
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="#aa717e" align="center" {...props}>
-      {"Copyright © "}
-      <Link color="inherit" href="http://localhost:3000/homepage">
-        www.femsense.com
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [signupError, setSignupError] = useState("");
 
-const theme = createTheme();
-
-export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      renterPassword: data.get("confirm password"),
-    });
+
+    if (name.length < 5) {
+      setSignupError("Name must be at least 5 characters");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setSignupError("Invalid email address");
+      return;
+    }
+    if (password.length < 8) {
+      setSignupError("Password must be at least 8 characters long");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setSignupError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/user/signupadmin", {
+        name,
+        email,
+        password,
+      });
+
+      console.log(response.data); // Assuming the API response contains relevant information
+
+      // Reset the form
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setSignupError("");
+
+      // Redirect to the login page
+      window.location.href = "/login";
+    } catch (error) {
+      console.error(error);
+      setSignupError("An error occurred while signing up. Please try again later.");
+    }
   };
+
+  const isValidEmail = (value) => {
+    // Basic email validation using regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const theme = createTheme();
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,33 +95,29 @@ export default function SignUp() {
             fontSize: "10px",
           }}
         >
-          <Avatar
-            sx={{ m: 1, width: "100px", height: "100px" }}
-            src={evalogo}
-          />
+          <Avatar sx={{ m: 1, width: "100px", height: "100px" }} src={evalogo} />
 
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="Name"
+                  name="name"
                   required
                   fullWidth
-                  id="Name"
+                  id="name"
                   label="Name"
                   autoFocus
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  error={name.length > 0 && name.length < 5}
+                  helperText={name.length > 0 && name.length < 5 ? "Name must be at least 5 characters" : ""}
                   sx={{
                     "& fieldset": {
-                      borderColor: "#6E5F6A !important",
+                      borderColor: name.length > 0 && name.length < 5 ? "red !important" : "#6E5F6A !important",
                     },
                   }}
                 />
@@ -100,9 +131,13 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  error={email.length > 0 && !isValidEmail(email)}
+                  helperText={email.length > 0 && !isValidEmail(email) ? "Invalid email address" : ""}
                   sx={{
                     "& fieldset": {
-                      borderColor: "#6E5F6A !important",
+                      borderColor: email.length > 0 && !isValidEmail(email) ? "red !important" : "#6E5F6A !important",
                     },
                   }}
                 />
@@ -116,6 +151,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   sx={{
                     "& fieldset": {
                       borderColor: "#6E5F6A !important",
@@ -129,9 +166,11 @@ export default function SignUp() {
                   fullWidth
                   name="confirmPassword"
                   label="Confirm Password"
-                  type="confirm password"
-                  id="password"
+                  type="password"
+                  id="confirmPassword"
                   autoComplete="rewrite-password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   sx={{
                     "& fieldset": {
                       borderColor: "#6E5F6A !important",
@@ -141,9 +180,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I agree with Terms & Conditions."
                 />
               </Grid>
@@ -166,16 +203,20 @@ export default function SignUp() {
                 fontFamily: "Open Sans",
                 textTransform: "none",
                 fontSize: "17px",
-
                 "&:hover": { backgroundColor: "#aa717e" },
               }}
             >
               Sign Up
             </Button>
+            {signupError && (
+              <Typography variant="body2" color="error" align="center">
+                {signupError}
+              </Typography>
+            )}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
-                  href="http://localhost:3000/login"
+                  href="/login"
                   variant="body2"
                   sx={{
                     color: "#aa717e",
@@ -188,8 +229,9 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
 }
+
+export default SignUp;
