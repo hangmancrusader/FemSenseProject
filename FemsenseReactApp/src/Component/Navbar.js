@@ -173,7 +173,7 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            E-VA App
+            Femsense
           </Typography>
           <Search>
             <SearchIconWrapper>
