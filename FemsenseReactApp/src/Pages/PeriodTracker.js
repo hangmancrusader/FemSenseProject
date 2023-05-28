@@ -2,12 +2,16 @@ import { Typography } from "@mui/material";
 import Calendar from "../Component/Calendar";
 import ButtonLogout from '../Component/ButtonLogout';
 import Navbar from '../Component/Navbar';
+import ReactMenu from '../Component/Lib'
+import Library from '../Pages/Library'
+import BlogsButton from '../Component/BlogsButton'
 const PeriodTracker = () => {
   return (
     <div>
-      <Navbar/>
+      {/* <Library/> */}
+      <BlogsButton/>
       <ButtonLogout />
-      
+      {/* <ReactMenu/> */}
       <Typography
         sx={{
           fontFamily: "Open Sans",
