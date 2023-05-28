@@ -91,7 +91,8 @@ router.post('/logout', authenticateToken,async (req, res) => {
     // Clear the JWT token from the user document in the database
     //user.token = '';
     //await user.save();
-    res.cookie('jwt','',{maxAge:1});
+    
+    // res.cookie('jwt','',{maxAge:1});
     res.json({ message: 'Logout successful' });
   });
   // Sign-up endpoint
@@ -171,19 +172,18 @@ router.put('/updatedetails',authenticateToken, async (req, res) => {
     }
   });
  // Middleware function to authenticate JWT token
-function authenticateToken(req, res, next) {
-    //const authHeader = req.headers['authorization'];
-    //const token = authHeader && authHeader.split(' ')[1];
-    const token =req.cookies.jwt;
-    if (token == null) return res.status(401).json({ message: 'JWT token is required' });
+ function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.status(401).json({ message: 'JWT token is required' });
+
+  jwt.verify(token, 'secret', (err, user) => {
+    if (err) return res.status(403).json({ message: 'Invalid JWT token' });
+    req.user = user;
+    next();
+  });
+}
   
-    jwt.verify(token, 'secret', (err, user) => {
-      if (err) return res.status(403).json({ message: 'Invalid JWT token' });
-      req.user = user;
-      console.log(req.user)
-      next();
-    });
-  }
  
   const Createtoken =(id,email)=>{
     const maxage=3*24*60*60;
@@ -207,9 +207,10 @@ function authenticateToken(req, res, next) {
   
     // Generate a JWT token
     const maxAge = 3 * 24 * 60 * 60;
-    const token = jwt.sign({ id: user._id, email: user.email }, 'secret', { expiresIn: maxAge });
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ user: user._id });
+    const token = jwt.sign({ id: user._id, email: user.email }, 'secret', { expiresIn: maxAge * 1000  });
+    //  localStorage.setItem('jwt', token);
+    //  localStorage.setItem('userid', user._id);
+    res.status(201).json({ user: user._id, token });
   });
   
 module.exports = router;

@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material";
 import Calendar from "../Component/Calendar";
-
+import ButtonLogout from '../Component/ButtonLogout';
 const PeriodTracker = () => {
   return (
     <div>
+      <ButtonLogout />
       <Typography
         sx={{
           fontFamily: "Open Sans",

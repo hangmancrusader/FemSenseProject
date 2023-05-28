@@ -37,7 +37,13 @@ function Login() {
         email,
         password,
       }) .then((result) => {
+         const token = result.data.token;
+         const id=result.data.user
+    // Do something with the token
+        console.log(token);
         console.log(result); // Handle the response as per your requirements
+         localStorage.setItem('jwt', token);
+         localStorage.setItem('userid',id);
         setOpen(true); // Show the Snackbar
         window.location.href = "/periodtracker"// Redirect to the desired page after successful login
         
