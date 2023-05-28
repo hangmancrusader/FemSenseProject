@@ -34,6 +34,9 @@ export default function ReactMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
+        // user profile
+        //reminders
+        //
         <MenuItem onClick={handleClose}> <Link style={{textDecoration: 'none', color:"inherit"}}to="/signup">Sign Up</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{textDecoration: 'none', color:"inherit"}} to="/login">Log In</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link style={{textDecoration: 'none', color:"inherit"}} to="/Lib">Health</Link></MenuItem>

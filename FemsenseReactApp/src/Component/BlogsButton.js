@@ -18,7 +18,8 @@ const BlogsButton = () => {
         textAlign: "center",
         
         color: "#C46471",}}
-        
+        // local storage user id 
+       
         ><Link style={{textDecoration: 'none', color:"inherit"}} to="/health">Insights</Link></Button>
         
     )
