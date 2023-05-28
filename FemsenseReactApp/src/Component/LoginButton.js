@@ -1,9 +1,9 @@
 import { Button } from '@mui/material/';
   
-const SnehaButton = () => {
+const Button = () => {
     return (
         <Button>Log in</Button>
     )
 }
 
-export default SnehaButton;
+export default Button;
