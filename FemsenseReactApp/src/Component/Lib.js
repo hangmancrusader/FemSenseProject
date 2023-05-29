@@ -43,7 +43,7 @@ export default function TitlebarImageList() {
           <Button
             sx={{
               width: 1200,
-              height: 50,
+              height: 0,
             }}
           >
             <Typography
@@ -57,7 +57,7 @@ export default function TitlebarImageList() {
               }}
             >
               {" "}
-              Health{" "}
+               Insights{" "}
             </Typography>
           </Button>
         </ListSubheader>
