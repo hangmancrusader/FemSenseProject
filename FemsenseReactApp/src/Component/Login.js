@@ -21,7 +21,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(false); // Snackbar state
+  const [open, setOpen] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -39,24 +39,24 @@ function Login() {
       }) .then((result) => {
          const token = result.data.token;
          const id=result.data.user
-    // Do something with the token
+    
         console.log(token);
-        console.log(result); // Handle the response as per your requirements
+        console.log(result); 
          localStorage.setItem('jwt', token);
          localStorage.setItem('userid',id);
-        setOpen(true); // Show the Snackbar
-        window.location.href = "/periodtracker"// Redirect to the desired page after successful login
+        setOpen(true); 
+        window.location.href = "/periodtracker"
         
       })
       .catch((err) => {
         console.log(err.message)
         alert("Invalid Email or password");
-        //setSignupError("User Already Exist");
+    
       });
   
-      console.log(response.data); // Handle the response as per your requirements
+      console.log(response.data);
   
-      // Redirect to the desired page after successful login
+      
       
     } catch (error) {
       
@@ -64,10 +64,10 @@ function Login() {
   };
 
   const isValidEmail = (value) => {
-    // Basic email validation using regular expression
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
-  };
+  }
 
   const theme = createTheme();
 
