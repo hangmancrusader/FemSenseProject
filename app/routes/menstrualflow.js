@@ -8,7 +8,7 @@ router.use(express.json());
 
 router.get(("/:flowID"),async(req,res)=>{
     try {
-        const menstraulflow = await MenstraulFlow.findById(req.params.flowID);
+        const menstraulflow = await MenstraulFlow.find({"menstrualflowID":req.params.flowID});
         if (!menstraulflow) {
           res.status(404).json({ message: "Data not found" });
         }
@@ -38,7 +38,7 @@ router.post(("/"), async(req,res)=>{
 
 router.delete(("/:flowID"), async(req,res)=>{
     try{ 
-        const menstraulflow = await MenstraulFlow.findByIdAndDelete(req.params.flowID);
+        const menstraulflow = await MenstraulFlow.findOneAndRemove({"menstrualflowID":req.params.flowID});//"this propert must be like the one in model"
         if(!menstraulflow)
         {
           res.status(404).json({message: "Data does not exist"});

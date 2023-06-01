@@ -22,7 +22,7 @@ router.post(("/"), async(req,res)=>{
 
 router.get(("/:moodID"),async(req,res)=>{
     try {
-        const moodtracker = await MoodTracker.findById(req.params.moodID);
+        const moodtracker = await MoodTracker.find({"moodId":req.params.moodID});
         if (!moodtracker) {
           res.status(404).json({ message: "Moods not found" });
         }
@@ -35,7 +35,7 @@ router.get(("/:moodID"),async(req,res)=>{
 
 router.delete(("/:moodID"), async(req,res)=>{
     try{ 
-        const moodtracker= await MoodTracker.findByIdAndDelete(req.params.moodID);
+        const moodtracker= await MoodTracker.findOneAndRemove({"moodId":req.params.moodID});
         if(!moodtracker)
         {
           res.status(404).json({message: "Moods does not exist"});
@@ -53,7 +53,7 @@ router.patch(("/editmood/:moodID"), async(res,req) =>{
     const { moodID } = req.params; //eqbl to const id = req.params.moodID
     const { description } = req.body;
 
-    const updatedDoc = await MoodTracker.findByIdAndUpdate(moodID, {
+    const updatedDoc = await MoodTracker.findOneAndReplace(moodID, {
       $push: { 'description.enum': description },
     }, { new: true });
 

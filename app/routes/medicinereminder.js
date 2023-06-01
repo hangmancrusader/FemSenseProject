@@ -24,7 +24,7 @@ router.post(("/"), async(req,res)=>{
 
 router.get(("/:reminderID"),async(req,res)=>{
     try {
-        const reminder = await medicinereminder.findById(req.params.reminderID);
+        const reminder = await Medicinereminder.find({"reminderID":req.params.reminderID});
         if (!reminder) {
           res.status(404).json({ message: "Reminder not found" });
         }
@@ -37,7 +37,7 @@ router.get(("/:reminderID"),async(req,res)=>{
 
 router.delete(("/:reminderID"), async(req,res)=>{
     try{ 
-        const reminder = await medicinereminder.findByIdAndDelete(req.params.reminderID);
+        const reminder = await Medicinereminder.findOneAndRemove({"reminderID":req.params.reminderID});
         if(!reminder)
         {
           res.status(404).json({message: "Reminder not found"});

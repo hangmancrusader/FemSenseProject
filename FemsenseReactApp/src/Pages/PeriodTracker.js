@@ -5,6 +5,7 @@ import Navbar from '../Component/Navbar';
 import ReactMenu from '../Component/Lib'
 import Library from '../Pages/Library'
 import BlogsButton from '../Component/BlogsButton'
+import SideBar from "../Component/TrackerComponent/SideBarNav2";
 const PeriodTracker = () => {
   return (
     <div>
@@ -12,8 +13,21 @@ const PeriodTracker = () => {
       <BlogsButton/>
       <ButtonLogout />
       {/* <ReactMenu/> */}
+      
       <Typography
         sx={{
+          fontFamily: "Open Sans",
+          position: "absolute",
+          top: "90px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          fontSize: "30px",
+          fontWeight: "bold",
+          textAlign: "center",
+          color: "#aa717e",
+          zIndex: 10,
+        }}
+       /* sx={{
           fontFamily: "Open Sans",
           position: "absolute",
           top: "50px",
@@ -25,10 +39,13 @@ const PeriodTracker = () => {
           fontStyle: "justfied",
           color: "#aa717e",
         }}
+      ...*/
       >
-        Let's track your period!
+          Let's track your period!
       </Typography>
+      
       <Calendar />
+      <SideBar />
     </div>
   );
 };

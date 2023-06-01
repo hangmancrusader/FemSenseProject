@@ -20,7 +20,8 @@ router.post(("/"), async(req,res)=>{
 router.get(("/:sympID"),async(req,res)=>{
   
     try {
-        const symptoms = await Symptoms.findById(req.params.sympID);
+        const symptoms = await Symptoms.find({"symptomId":req.params.sympID});
+        console.log(symptoms);
         if (!symptoms) {
           res.status(404).json({ message: "Symptoms not found" });
         }
@@ -33,7 +34,7 @@ router.get(("/:sympID"),async(req,res)=>{
 
 router.delete(("/:sympID"), async(req,res)=>{
     try{ 
-        const symptoms= await Symptoms.findByIdAndDelete(req.params.sympID);
+        const symptoms= await Symptoms.findOneAndRemove({"symptomId":req.params.sympID});
         if(!symptoms)
         {
           res.status(404).json({message: "Symptoms does not exist"});
