@@ -65,7 +65,7 @@ export default function BasicRating() {
               marginLeft: "20px",
             }}
           >
-            Enjoying E-va?
+            Enjoying Femsense
           </Typography>
         </Stack>
         <Stack>
