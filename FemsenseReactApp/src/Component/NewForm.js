@@ -455,7 +455,8 @@ const NewForm = () => {
           size="small"
           flexDirection="row"
           onClick={() => {
-            alert("finish survey");
+            window.location.href = "/signup"
+            // alert("finish survey");
           }}
           sx={{
             color: "#ffffff",
