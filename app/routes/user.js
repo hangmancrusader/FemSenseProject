@@ -18,30 +18,7 @@ const handleErrors=(err)=>
    return errors;
 }
 
-router.post('/forget_password', authenticateToken,async (req, res) => {
-    const {  oldPassword, newPassword } = req.body;
-    const emm=req.user.email;
-    // Check if the user exists
-    const user = await User.findOne({ emm });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
 
-    // Check if the old password is correct
-    const isMatch = (user.password==oldPassword);
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Old password is incorrect' });
-    }
-  
-    // Generate a new password hash using the 'bcrypt' module
- 
-  
-    // Update the user's password in the database
-    user.password = newPassword;
-    await user.save();
-  
-    res.json({ message: 'Password updated successfully' });
-  });
 
 
   router.delete('/delete_account',authenticateToken, async (req, res) => {
@@ -156,14 +133,11 @@ router.post('/logout', authenticateToken,async (req, res) => {
   // Update user profile
 router.put('/updatedetails',authenticateToken, async (req, res) => {
   const  userid = req.user.id;
-    const {  first_name, last_name, phonenumber, dob } = req.body;
+    const {   name } = req.body;
     try {
       const updatedUser = await User.findByIdAndUpdate(userid, {
         
-        first_name,
-        last_name,
-        phonenumber,
-        dob
+        name,
       }, { new: true });
       res.json(updatedUser);
       
