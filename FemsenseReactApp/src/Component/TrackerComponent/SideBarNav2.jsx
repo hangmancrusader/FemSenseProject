@@ -1,8 +1,6 @@
 import React from "react";
 import { Drawer as MUIDrawer, ListItem, List, ListItemIcon, ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import TodayOutlinedIcon from "@mui/icons-material/TodayOutlined";
 import EditNotificationsOutlinedIcon from "@mui/icons-material/EditNotificationsOutlined";
@@ -24,12 +22,12 @@ const Drawer = () => {
     {
       text: "User",
       icon: <AccountCircleOutlinedIcon />,
-      onClick: () => navigate("/")
+      onClick: () => navigate("/userprofile")
     },
     {
       text: "DayTrack",
       icon: <TodayOutlinedIcon />,
-      onClick: () => navigate("/about")
+      onClick: () => navigate("/daytrackoptions")
     },
     {
       text: "Reminders",
