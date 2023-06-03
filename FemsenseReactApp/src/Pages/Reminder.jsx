@@ -1,11 +1,12 @@
 import React from 'react';
 import ReminderForm from '../Component/TrackerComponent/ReminderForm';
+import { Typography} from "@mui/material";
 
 const App = () => {
   return (
     <div>
-      <h1>Add Reminder</h1>
-      <ReminderForm />
+      <Typography variant="h4" sx={{ textAlign: 'center',fontFamily: "Avenir Next", marginTop:'6rem', color: '#C46471' }}>Add Reminder</Typography>
+        <ReminderForm />
     </div>
   );
 };
