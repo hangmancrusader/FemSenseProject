@@ -60,21 +60,9 @@ function SignUp() {
       .catch((err) => {
         console.log(err.message)
         alert("User Already Exist");
-        //setSignupError("User Already Exist");
+       
       })
-      // if()
-      // console.log(response); // Assuming the API response contains relevant information
-      // setPassword("");
-      // setConfirmPassword("");
-      // // Reset the form
-      // setName("");
-      // setEmail("");
-      // setPassword("");
-      // setConfirmPassword("");
-      // setSignupError("");
-
-      // Redirect to the login page
-      //;
+      
     } catch (error) {
       console.log("Hello");
       setSignupError("Error occured");
@@ -83,7 +71,7 @@ function SignUp() {
   };
 
   const isValidEmail = (value) => {
-    // Basic email validation using regular expression
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
   };
