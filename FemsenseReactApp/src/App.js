@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import NewPageSurvey from "./Pages/NewPageSurvey";
 import UserReg from "./Pages/UserReg";
@@ -20,28 +20,68 @@ import PostSymp from "./Pages/postsymptoms";
 import PostPA from "./Pages/postPA";
 import PostNotes from "./Pages/postnotes";
 import MoodPage from "./Pages/getmoods";
+
+// Example HOC for authorization
+const ProtectedRoute = ({ element: Component, ...rest }) => {
+  const isAuthenticated = localStorage.getItem("jwt"); // Check if user is logged in (using JWT in local storage)
+
+  return isAuthenticated ? (
+    <Component {...rest} />
+  ) : (
+    <Navigate to="/login" replace /> // Redirect to login if not logged in
+  );
+};
+
 const App = () => (
   <Routes>
-    <Route path="/survey" element={<NewPageSurvey />} />
-    <Route path="/signup" element={<UserReg />} />
-    <Route path="/periodtracker" element={<PeriodTracker />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/health" element={<Library />} />
-    <Route path="/contactus" element={<Contact />} />
     <Route path="/homepage" element={<Homepage />} />
-    <Route path="/rateus" element={<Rating />} />
-    <Route path="/reminders" element={<Reminder/>} />
-    <Route path="/daytrackoptions" element={<DayTrackOptions/>} />
-    <Route path="/postdaytrack"  element={<Postdaytrack/>} />
-    <Route path="/viewdaytrack"  element={<Viewdaytrack/>} />
-    <Route path="/userprofile"  element={<UserProfileOptions/>} />
-    <Route path="/postmoods"  element={<PostMoods/>} />
-    <Route path="/postflow"  element={<PostFlow/>} />
-    <Route path="/postsymp"  element={<PostSymp/>} />
-    <Route path="/postPA"  element={<PostPA/>} />
-    <Route path="/postnotes"  element={<PostNotes/>} />
-    <Route path="/moods/viewmoods"  element={<MoodPage/>} />
+
+    {/* Unprotected routes */}
+    <Route path="/signup" element={<UserReg />} />
+    <Route path="/login" element={<Login />} />
+
+    {/* Protected routes */}
+    <Route
+      path="/survey"
+      element={<ProtectedRoute element={NewPageSurvey} />}
+    />
+    <Route
+      path="/periodtracker"
+      element={<ProtectedRoute element={PeriodTracker} />}
+    />
+    <Route path="/health" element={<ProtectedRoute element={Library} />} />
+    <Route path="/contactus" element={<ProtectedRoute element={Contact} />} />
+    <Route path="/rateus" element={<ProtectedRoute element={Rating} />} />
+    <Route path="/reminders" element={<ProtectedRoute element={Reminder} />} />
+    <Route
+      path="/daytrackoptions"
+      element={<ProtectedRoute element={DayTrackOptions} />}
+    />
+    <Route
+      path="/postdaytrack"
+      element={<ProtectedRoute element={Postdaytrack} />}
+    />
+    <Route
+      path="/viewdaytrack"
+      element={<ProtectedRoute element={Viewdaytrack} />}
+    />
+    <Route
+      path="/userprofile"
+      element={<ProtectedRoute element={UserProfileOptions} />}
+    />
+    <Route path="/postmoods" element={<ProtectedRoute element={PostMoods} />} />
+    <Route path="/postflow" element={<ProtectedRoute element={PostFlow} />} />
+    <Route path="/postsymp" element={<ProtectedRoute element={PostSymp} />} />
+    <Route path="/postPA" element={<ProtectedRoute element={PostPA} />} />
+    <Route
+      path="/postnotes"
+      element={<ProtectedRoute element={PostNotes} />}
+    />
+    <Route
+      path="/moods/viewmoods"
+      element={<ProtectedRoute element={MoodPage} />}
+    />
   </Routes>
 );
 
-export default App
+export default App;

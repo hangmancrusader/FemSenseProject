@@ -11,7 +11,7 @@ const PeriodTracker = () => {
     <div>
       {/* <Library/> */}
       <BlogsButton/>
-      <ButtonLogout />
+      <ButtonLogout/>
       {/* <ReactMenu/> */}
       
       <Typography
