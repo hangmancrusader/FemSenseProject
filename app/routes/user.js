@@ -22,7 +22,7 @@ const handleErrors=(err)=>
 
 
   router.delete('/delete_account',authenticateToken, async (req, res) => {
-    const userId = req.user.id
+    const userId = req.body.userid
     console.log(userId)
     try {
       const user = await User.findByIdAndDelete(userId);
