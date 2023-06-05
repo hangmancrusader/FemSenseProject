@@ -10,7 +10,8 @@ router.post(("/"), async(req,res)=>{
       console.log(symptomId,description);
       const symptoms = new Symptoms({symptomId, description});
       await symptoms.save();
-      res.status(201).json({ message: "Symptoms logged successfully", symptomId:symptomId,description:description });
+      console.log(symptoms._id);
+      res.status(201).json({ message: "Symptoms logged successfully",  symptomId:symptomId,description:description, mongoID:symptoms._id });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to log symptoms" });

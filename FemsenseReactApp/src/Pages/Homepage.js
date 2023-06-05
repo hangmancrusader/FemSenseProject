@@ -25,7 +25,7 @@ function Homepage() {
     // call API
     // loop 
     
-    <Card id='' title='' image_url=''/> 
+   {/*<Card id='' title='' image_url=''/>*/} 
   
     <Card1 />
     <Card2 />

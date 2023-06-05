@@ -97,6 +97,32 @@ router.post('/mood/:id', async (req, res) => {
   res.send(daytrack);
 });
 
+router.get('/getsymp/:id', async (req, res) => {
+  const daytrackId = req.params.id;
 
+  try {
+    const daytrack = await DayTrack.findById(daytrackId).populate('Symptoms');
+    const symp=daytrack.Symptoms;
+    
+    res.json(daytrack.Symptoms);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve daytrack and symptoms.' });
+  }
+  
+});
+
+router.get('/getmood/:id', async (req, res) => {
+  const daytrackId = req.params.id;
+
+  try {
+    const daytrack = await DayTrack.findById(daytrackId).populate('Mood');
+    const symp=daytrack.Mood;
+    
+    res.json(daytrack.Mood);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve daytrack and mood.' });
+  }
+  
+});
 
 module.exports = router;

@@ -10,9 +10,17 @@ import Contact from "./Pages/Contact";
 import Homepage from "./Pages/Homepage";
 import Rating from "./Pages/Rating";
 import Reminder from "./Pages/Reminder"
-import DayTrackOptions from "./Pages/daytrackoptions";
-import Postdaytrack from "./Pages/PostDaytrack";
-import Viewdaytrack from "./Pages/ViewDayTrack";
+
+//Daytrack routes
+import DayTrackOptions from "./Pages/Daytrack/daytrackoptions";
+import Postdaytrack from "./Pages/Daytrack/PostDaytrack";
+import Viewdaytrack from "./Pages/Daytrack/viewdaytracks";
+import Updatedaytrack from "./Pages/Daytrack/updatedaytrack";
+import Patchdaytrack from "./Pages/Daytrack/patchdaytrack";
+import Viewanddeletedaytrack from "./Pages/Daytrack/viewanddeletedaytrack"
+import Deletedaytrack from "./Pages/Daytrack/deletedaytrack";
+
+//Tracker Routes
 import UserProfileOptions from "./Pages/UserProfileOptions";
 import PostMoods from "./Pages/postmood";
 import PostFlow from "./Pages/postflow";
@@ -20,6 +28,11 @@ import PostSymp from "./Pages/postsymptoms";
 import PostPA from "./Pages/postPA";
 import PostNotes from "./Pages/postnotes";
 import MoodPage from "./Pages/getmoods";
+
+//adminpanel
+import UserProfile from "./Pages/getuser";
+
+
 const App = () => (
   <Routes>
     <Route path="/survey" element={<NewPageSurvey />} />
@@ -31,9 +44,15 @@ const App = () => (
     <Route path="/homepage" element={<Homepage />} />
     <Route path="/rateus" element={<Rating />} />
     <Route path="/reminders" element={<Reminder/>} />
+
     <Route path="/daytrackoptions" element={<DayTrackOptions/>} />
     <Route path="/postdaytrack"  element={<Postdaytrack/>} />
     <Route path="/viewdaytrack"  element={<Viewdaytrack/>} />
+    <Route path="/updatedaytrack"  element={<Updatedaytrack/>} />
+    <Route path="/updatedaytrack/patchdaytrack/:id" element={<Patchdaytrack />} />
+    <Route path="/deletedaytrack" element={<Viewanddeletedaytrack />} />
+    <Route path="/deletedaytrack/deleted/:id" element={<Deletedaytrack />} />
+
     <Route path="/userprofile"  element={<UserProfileOptions/>} />
     <Route path="/postmoods"  element={<PostMoods/>} />
     <Route path="/postflow"  element={<PostFlow/>} />
@@ -41,6 +60,9 @@ const App = () => (
     <Route path="/postPA"  element={<PostPA/>} />
     <Route path="/postnotes"  element={<PostNotes/>} />
     <Route path="/moods/viewmoods"  element={<MoodPage/>} />
+    
+    <Route path="/getuser"  element={<UserProfile/>} />
+
   </Routes>
 );
 
