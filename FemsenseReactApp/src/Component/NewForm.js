@@ -11,10 +11,50 @@ import RadioThree from "./SurveyComponents/RadioThree";
 import RadioFour from "./SurveyComponents/RadioFour";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import * as React from "react";
+import axios from 'axios';
 
 const NewForm = () => {
   const [activePage, setActivePage] = useState(1);
   const navigate = useNavigate();
+  const [selectedValueradio, setSelectedValueradio] = useState("");
+  const [selectedValue, setSelectedValue] = React.useState("");
+  const [selectedProduct, setSelectedProduct] = React.useState([]);
+  const [flowValue, setFlowValue] = useState(0);
+  const [pmsValue, setPmsValue] = useState("");
+  const [moodValue, setMoodValue] = useState(null);
+  const [birthControl, setBirthControl] = useState(null);
+  const [reproductiveDisorders, setReproductiveDisorders] = useState(null);
+
+  const handleReproductiveDisordersChange = (event) => {
+    setReproductiveDisorders(event.target.value);
+  };
+
+  const handleBirthControlChange = (event) => {
+    setBirthControl(event.target.value);
+  };
+
+
+  const handleComboBoxChange = (event, newValue) => {
+    setMoodValue(newValue);
+  };
+
+  const handleRadioChange = (event) => {
+    setPmsValue(event.target.value);
+  };
+
+  const handleSliderChange = (event, newValue) => {
+    setFlowValue(newValue);
+  };
+
+  const handleCheckboxChange = (selected) => {
+    setSelectedProduct(selected);
+  };
+
+  const handleSelectedValue = (value) => {
+    setSelectedValue(value);
+    console.log("Selected Value get:", value);
+  };
   const handleMaybeLater = () => {
     navigate("/signup");
   };
@@ -136,7 +176,8 @@ const NewForm = () => {
             }}
           >
             <h3>Do you track your period?</h3>
-            <RadioButton />
+            <RadioButton setSelectedValueradio={setSelectedValueradio} />
+           
           </Box>
         </>
       )}
@@ -171,7 +212,7 @@ const NewForm = () => {
           >
             {" "}
             <h3>What is your cycle length?</h3>
-            <Select />
+            <Select setSelectedValue={handleSelectedValue} />
           </Box>
         </>
       )}
@@ -206,7 +247,7 @@ const NewForm = () => {
           >
             {" "}
             <h3>Which period product do you use?</h3>
-            <Checkbox />
+            <Checkbox onChange={handleCheckboxChange} />
           </Box>
         </>
       )}
@@ -241,7 +282,7 @@ const NewForm = () => {
           >
             {" "}
             <h3>How would you describe your flow?</h3>
-            <Slider />
+            <Slider  value={flowValue} onChange={handleSliderChange} />
           </Box>
         </>
       )}
@@ -276,7 +317,7 @@ const NewForm = () => {
           >
             {" "}
             <h3>Is it easy for you to cope with PMS symptoms? </h3>
-            <RadioTwo />
+            <RadioTwo value={pmsValue} onChange={handleRadioChange} />
           </Box>
         </>
       )}
@@ -311,7 +352,7 @@ const NewForm = () => {
           >
             {" "}
             <h3> Do you have mood swings on your period? </h3>
-            <Combobox />
+            <Combobox  value={moodValue} onChange={handleComboBoxChange}  />
           </Box>
         </>
       )}
@@ -346,7 +387,7 @@ const NewForm = () => {
           >
             {" "}
             <h3>Are you on birth control now?</h3>
-            <RadioThree />
+            <RadioThree value={birthControl} onChange={handleBirthControlChange} />
           </Box>
         </>
       )}
@@ -383,7 +424,8 @@ const NewForm = () => {
               Do you have any reproductive health disorders (endometriosis,
               PCOS, etc)?{" "}
             </h3>
-            <RadioFour />
+            <RadioFour  value={reproductiveDisorders}
+        onChange={handleReproductiveDisordersChange} />
           </Box>
         </>
       )}
@@ -450,35 +492,60 @@ const NewForm = () => {
         </Button>
       )}
       {activePage > 8 && (
-        <Button
-          variant="contained"
-          size="small"
-          flexDirection="row"
-          onClick={() => {
-            window.location.href = "/signup"
-            // alert("finish survey");
-          }}
-          sx={{
-            color: "#ffffff",
-            backgroundColor: "#dda0ad",
-            fontWeight: "bold",
-            padding: "20px",
-            margin: "5px",
-            height: "10px",
-            width: "80px",
-            buttonShadow: "10px",
-            fontFamily: "Open Sans",
-            "&:hover": { backgroundColor: "#aa717e" },
-            textTransform: "none",
-            fontSize: "15px",
-            top: "50px",
-            left: "160px",
-            marginTop: "400px",
-            marginLeft: "215px",
-          }}
-        >
-          Finish
-        </Button>
+       <Button
+       variant="contained"
+       size="small"
+       flexDirection="row"
+       onClick={async () => {
+         try {
+           // Retrieve userId from local storage
+           const userId = localStorage.getItem('userId');
+     
+           // Check if userId exists
+           if (!userId) {
+             console.error('User ID not found');
+             return;
+           }
+     
+           // Call the POST API to save user preferences
+           await axios.post('http://localhost:3000/userpreference/user-preference', {
+             userId: userId,
+             selectedValue: selectedValue,
+             selectedProduct: selectedProduct,
+             flowValue: flowValue,
+             pmsValue: pmsValue,
+             moodValue: moodValue,
+             birthControl: birthControl,
+             reproductiveDisorders: reproductiveDisorders
+           });
+     
+           // Redirect to the tracker page
+           window.location.href = "/tracker";
+         } catch (error) {
+           console.error("Error saving user preferences:", error);
+         }
+       }}
+       sx={{
+         color: "#ffffff",
+         backgroundColor: "#dda0ad",
+         fontWeight: "bold",
+         padding: "20px",
+         margin: "5px",
+         height: "10px",
+         width: "80px",
+         buttonShadow: "10px",
+         fontFamily: "Open Sans",
+         "&:hover": { backgroundColor: "#aa717e" },
+         textTransform: "none",
+         fontSize: "15px",
+         top: "50px",
+         left: "160px",
+         marginTop: "400px",
+         marginLeft: "215px",
+       }}
+     >
+       Finish
+     </Button>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
@@ -21,12 +21,17 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export default function DiscreteSliderLabel() {
+export default function SliderComponent({ value, onChange }) {
+  const handleChange = (event, newValue) => {
+    onChange(event, newValue);
+  };
+
   return (
     <Box sx={{ width: "280px", margin: "30px" }}>
       <Slider
         aria-label="Always visible"
-        defaultValue={0}
+        value={value}
+        onChange={handleChange}
         getAriaValueText={valuetext}
         step={50}
         marks={marks}

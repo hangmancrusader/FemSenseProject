@@ -27,7 +27,7 @@ const NewPageSurvey = () => {
         }}
       >
         {" "}
-        Welcome to Femsense Desktop App{" "}
+        {/* Welcome to Femsense Desktop App{" "} */}
       </Typography>
       <NewForm />
     </div>

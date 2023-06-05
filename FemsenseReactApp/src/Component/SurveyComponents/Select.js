@@ -5,11 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-export default function BasicSelect() {
+export default function BasicSelect({ setSelectedValue }) {
   const [period, setPeriod] = React.useState("");
 
   const handleChange = (event) => {
-    setPeriod(event.target.value);
+    const selectedValue = event.target.value;
+    setPeriod(selectedValue);
+    setSelectedValue(selectedValue);
   };
 
   return (
@@ -44,7 +46,7 @@ export default function BasicSelect() {
                 color: "#aa717e",
               },
             }}
-            value={21 - 27}
+            value={"21 - 27"}
           >
             21 - 27 days cycle
           </MenuItem>
@@ -55,7 +57,7 @@ export default function BasicSelect() {
                 color: "#aa717e",
               },
             }}
-            value={28 - 35}
+            value={"28 - 35"}
           >
             28 - 35 days cycle
           </MenuItem>
@@ -66,7 +68,7 @@ export default function BasicSelect() {
                 color: "#aa717e",
               },
             }}
-            value={36 - 40}
+            value={"36 - 40"}
           >
             36 - 40 days cycle
           </MenuItem>

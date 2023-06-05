@@ -10,7 +10,7 @@ function Dates() {
   const [cycle, setCycle] = useState(28);
   const [openTracker, setOpenTracker] = useState(false);
 
-  console.log(cycle);
+  //console.log(cycle);
   const cycleLength = parseInt(cycle);
 
   const handleTrackerOpen = () => {
@@ -18,8 +18,9 @@ function Dates() {
   };
   const handleCalendarDaySelection = (value) => {
     console.log(value);
-    handleTrackerOpen();
+    // handleTrackerOpen();
     setSelectedDate(value);
+    window.location.href = '/daytrackoptions';
   };
 
   return (

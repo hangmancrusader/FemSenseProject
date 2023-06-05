@@ -1,13 +1,19 @@
-import * as React from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-export default function ComboBox() {
+export default function ComboBox({ value, onChange }) {
+  const handleChange = (event, newValue) => {
+    onChange(event, newValue);
+  };
+
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={mood}
+      value={value}
+      onChange={handleChange}
       sx={{
         width: "300px",
         color: "#dda0ad",

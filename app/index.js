@@ -45,7 +45,8 @@ const moodtrackerRoutes = require('./routes/mood');
 const menstraulflowRoutes = require('./routes/menstrualflow');
 const cookieParser = require('cookie-parser');
 const daytrackRoutes = require('./routes/daytrack');
-
+ const userpreference =require('./routes/userpreference');
+ app.use('/userpreference',userpreference)
 
 //defining routes that handle req to given endpoints
 app.use("/medicinereminder", reminderRoutes);
@@ -60,6 +61,7 @@ app.use("/menstrualflow", menstraulflowRoutes);
 app.use("/daytracker", daytrackRoutes);
 app.use(bodyParser.json());
 app.use("/daytracker", daytrackRoutes);
+
 app.use(cookieParser());
 app.use(express.json());
 

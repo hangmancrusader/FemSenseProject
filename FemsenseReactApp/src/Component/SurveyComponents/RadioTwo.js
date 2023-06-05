@@ -1,17 +1,24 @@
-import * as React from "react";
+import React from "react";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
-export default function RadioButtonsGroup() {
+export default function RadioButtonsGroup({ value, onChange }) {
+  const handleChange = (event) => {
+    onChange(event);
+  };
+
   return (
     <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+      <FormLabel id="demo-radio-buttons-group-label">
+        Please select an option:
+      </FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="female"
+        value={value}
+        onChange={handleChange}
         name="radio-buttons-group"
       >
         <FormControlLabel

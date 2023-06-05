@@ -1,12 +1,16 @@
-const  mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const userpreferenceSchema = mongoose.Schema(
-    {
+const UserPreferenceSchema = new mongoose.Schema({
+  selectedValueradio: String,
+  selectedValue: String,
+  selectedProduct: [String],
+  flowValue: Number,
+  pmsValue: String,
+  moodValue: String,
+  birthControl: String,
+  reproductiveDisorders: String
+});
 
-        
-          
-    }
-)
+const UserPreference = mongoose.model('UserPreference', UserPreferenceSchema);
 
-
-module.exports =mongoose.model("UserPreference", userpreferenceSchema);
+module.exports = UserPreference;

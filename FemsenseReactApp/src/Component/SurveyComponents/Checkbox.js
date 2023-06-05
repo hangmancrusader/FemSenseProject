@@ -1,26 +1,53 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-//to check with Soma, if we can leave .useState empty?
-export default function IndeterminateCheckbox() {
-  const [checked, setChecked] = React.useState([]);
+export default function CheckboxComponent({ onChange }) {
+  const [checked, setChecked] = useState([]);
 
   const handleChangePads = (event) => {
-    setChecked([event.target.checked, checked[1], checked[2], checked[3]]);
+    const updatedChecked = [
+      event.target.checked,
+      checked[1],
+      checked[2],
+      checked[3]
+    ];
+    setChecked(updatedChecked);
+    onChange(updatedChecked);
   };
 
   const handleChangeTampons = (event) => {
-    setChecked([checked[0], event.target.checked, checked[2], checked[3]]);
+    const updatedChecked = [
+      checked[0],
+      event.target.checked,
+      checked[2],
+      checked[3]
+    ];
+    setChecked(updatedChecked);
+    onChange(updatedChecked);
   };
 
-  //check "checked with Soma"
   const handleChangeMenstrualCup = (event) => {
-    setChecked([checked[0], checked[1], event.target.checked, checked[3]]);
+    const updatedChecked = [
+      checked[0],
+      checked[1],
+      event.target.checked,
+      checked[3]
+    ];
+    setChecked(updatedChecked);
+    onChange(updatedChecked);
   };
+
   const handleChangeNoAnswer = (event) => {
-    setChecked([checked[0], checked[1], checked[2], event.target.checked]);
+    const updatedChecked = [
+      checked[0],
+      checked[1],
+      checked[2],
+      event.target.checked
+    ];
+    setChecked(updatedChecked);
+    onChange(updatedChecked);
   };
 
   return (
@@ -35,8 +62,8 @@ export default function IndeterminateCheckbox() {
               sx={{
                 color: "#dda0ad",
                 "&.Mui-checked": {
-                  color: "#aa717e",
-                },
+                  color: "#aa717e"
+                }
               }}
             />
           }
@@ -50,8 +77,8 @@ export default function IndeterminateCheckbox() {
               sx={{
                 color: "#dda0ad",
                 "&.Mui-checked": {
-                  color: "#aa717e",
-                },
+                  color: "#aa717e"
+                }
               }}
             />
           }
@@ -65,8 +92,8 @@ export default function IndeterminateCheckbox() {
               sx={{
                 color: "#dda0ad",
                 "&.Mui-checked": {
-                  color: "#aa717e",
-                },
+                  color: "#aa717e"
+                }
               }}
             />
           }
@@ -80,8 +107,8 @@ export default function IndeterminateCheckbox() {
               sx={{
                 color: "#dda0ad",
                 "&.Mui-checked": {
-                  color: "#aa717e",
-                },
+                  color: "#aa717e"
+                }
               }}
             />
           }
