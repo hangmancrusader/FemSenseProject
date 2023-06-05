@@ -38,7 +38,7 @@ const handleErrors=(err)=>
 
   // Get user profile endpoint
 router.get('/profile',authenticateToken, async (req, res) => {
-    const userid = req.user.id;
+    const userid = req.body.userid;
   
     // Check if the user exists
     const user = await User.findById(userid);
@@ -48,11 +48,9 @@ router.get('/profile',authenticateToken, async (req, res) => {
   console.log(user)
     // Return the user profile information
     res.json({
-      firstname: user.first_name,
-      lastname:user.last_name,
+      username: user.name,
       email: user.email,
-      phonenumber: user.phonenumber,
-      dob:user.dob
+      
     });
   });
   // Logout endpoint
