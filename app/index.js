@@ -2,8 +2,8 @@ require("dotenv").config({ path: '../.env' });
 
 //fatimas db 
 const mongoose=require('mongoose')
-//mongoose.connect( "mongodb+srv://fmus22996:outlander1746@cluster0.pk5gqpb.mongodb.net/?retryWrites=true&w=majority "
-mongoose.connect( "mongodb+srv://notsobad_bilal:bilal786786@cluster0.r8hl8am.mongodb.net/?retryWrites=true&w=majority "
+mongoose.connect( "mongodb+srv://fmus22996:outlander1746@cluster0.pk5gqpb.mongodb.net/?retryWrites=true&w=majority "
+//mongoose.connect( "mongodb+srv://notsobad_bilal:bilal786786@cluster0.r8hl8am.mongodb.net/?retryWrites=true&w=majority "
 
 );
 
