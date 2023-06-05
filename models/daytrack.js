@@ -31,13 +31,13 @@ const daytrackSchema = mongoose.Schema(
         },
         Mood:{
             type:[mongoose.Schema.Types.ObjectId],
-            ref:'mood',
+            ref:'Mood',
             required:  false
         },
         Symptoms:
         {
             type:[mongoose.Schema.Types.ObjectId],
-            ref:'symptoms',
+            ref:'Symptoms',
             required:  false
         },
         Physical_Activity:{

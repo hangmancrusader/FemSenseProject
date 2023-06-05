@@ -50,6 +50,9 @@ router.get('/profile',authenticateToken, async (req, res) => {
     res.json({
       username: user.name,
       email: user.email,
+      phonenumber: user.phonenumber,
+      dob:user.dob,
+      roleid:user.roleid
       
     });
   });
@@ -72,7 +75,7 @@ router.post('/logout', authenticateToken,async (req, res) => {
   });
   // Sign-up endpoint
   router.post('/signupadmin', async (req, res) => {
-    const { email, password, name } = req.body;
+    const { email, password, name, roleid } = req.body;
   
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
@@ -88,13 +91,13 @@ router.post('/logout', authenticateToken,async (req, res) => {
     const newUser = new User({
       email,
       password: hashedPassword,
-      name,
+      name, roleid
     });
   
     // Save the new user document to the database
     try {
       const savedUser = await newUser.save();
-      res.json({ message: 'Sign-up successful' });
+      res.json({ message: 'Sign-up successful' , roleid:roleid});
     } catch (err) {
       const errors=handleErrors(err)
       res.status(400).json({ errors  });
@@ -182,7 +185,7 @@ router.put('/updatedetails',authenticateToken, async (req, res) => {
     const token = jwt.sign({ id: user._id, email: user.email }, 'secret', { expiresIn: maxAge * 1000  });
     //  localStorage.setItem('jwt', token);
     //  localStorage.setItem('userid', user._id);
-    res.status(201).json({ user: user._id, token });
+    res.status(201).json({ user: user._id, token, roleid:user.roleid});
   });
   
 module.exports = router;

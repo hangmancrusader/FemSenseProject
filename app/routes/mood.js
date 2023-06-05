@@ -13,7 +13,7 @@ router.post(("/"), async(req,res)=>{
       const moodtracker = new MoodTracker({moodId,description});
       console.log(moodtracker);
       await moodtracker.save();
-      res.status(201).json({ message: "Moods logged successfully", id:moodId,description:description });
+      res.status(201).json({ message: "Moods logged successfully", id:moodId,description:description,mongoID:moodtracker._id });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to log moods" });

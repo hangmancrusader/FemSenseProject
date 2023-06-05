@@ -10,9 +10,17 @@ import Contact from "./Pages/Contact";
 import Homepage from "./Pages/Homepage";
 import Rating from "./Pages/Rating";
 import Reminder from "./Pages/Reminder"
-import DayTrackOptions from "./Pages/daytrackoptions";
-import Postdaytrack from "./Pages/PostDaytrack";
-import Viewdaytrack from "./Pages/ViewDayTrack";
+
+//Daytrack routes
+import DayTrackOptions from "./Pages/Daytrack/daytrackoptions";
+import Postdaytrack from "./Pages/Daytrack/PostDaytrack";
+import Viewdaytrack from "./Pages/Daytrack/viewdaytracks";
+import Updatedaytrack from "./Pages/Daytrack/updatedaytrack";
+import Patchdaytrack from "./Pages/Daytrack/patchdaytrack";
+import Viewanddeletedaytrack from "./Pages/Daytrack/viewanddeletedaytrack"
+import Deletedaytrack from "./Pages/Daytrack/deletedaytrack";
+
+//Tracker Routes
 import UserProfileOptions from "./Pages/UserProfileOptions";
 import PostMoods from "./Pages/postmood";
 import PostFlow from "./Pages/postflow";
@@ -53,6 +61,7 @@ const App = () => (
     <Route path="/contactus" element={<ProtectedRoute element={Contact} />} />
     <Route path="/rateus" element={<ProtectedRoute element={Rating} />} />
     <Route path="/reminders" element={<ProtectedRoute element={Reminder} />} />
+
     <Route
       path="/daytrackoptions"
       element={<ProtectedRoute element={DayTrackOptions} />}
@@ -65,6 +74,12 @@ const App = () => (
       path="/viewdaytrack"
       element={<ProtectedRoute element={Viewdaytrack} />}
     />
+    <Route path="/updatedaytrack" element = {<ProtectedRoute element={Updatedaytrack} />}/>
+    <Route path="/updatedaytrack/patchdaytrack/:id" element = {<ProtectedRoute element={Patchdaytrack} />}/>
+    <Route path="/deletedaytrack" element = {<ProtectedRoute element={Viewanddeletedaytrack} />} />
+    <Route path="/deletedaytrack/deleted/:id" element = {<ProtectedRoute element={Deletedaytrack} />} />
+
+
     <Route
       path="/userprofile"
       element={<ProtectedRoute element={UserProfileOptions} />}
@@ -74,13 +89,9 @@ const App = () => (
     <Route path="/postsymp" element={<ProtectedRoute element={PostSymp} />} />
     <Route path="/postPA" element={<ProtectedRoute element={PostPA} />} />
     <Route
-      path="/postnotes"
-      element={<ProtectedRoute element={PostNotes} />}
-    />
+      path="/postnotes" element={<ProtectedRoute element={PostNotes} />}/>
     <Route
-      path="/moods/viewmoods"
-      element={<ProtectedRoute element={MoodPage} />}
-    />
+      path="/moods/viewmoods" element={<ProtectedRoute element={MoodPage} />}/>
   </Routes>
 );
 

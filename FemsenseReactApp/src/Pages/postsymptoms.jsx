@@ -23,8 +23,10 @@ const PostSymp = () => {
     .post('http://localhost:3000/symptoms/', SympData)
     .then(response => {
        // Assuming the ID is included in the response
-      console.log(response.data.id);
-      navigate(`http://localhost:3001/getmoods/${response.data.symptomId}`);
+      
+      console.log(response.data.symptomId);
+      console.log(response.data.mongoID);
+      navigate(`http://localhost:3001/getmoods/${response.data.symptomId}`);//symtomId is the name field to be extracted
     })
     .catch(error => {
       console.error(error);

@@ -17,13 +17,15 @@ const PostMoods = () => {
         description:mood
       };
     console.log(moodData);
-
+    
     //integerate API
     axios
     .post('http://localhost:3000/moodtracker/', moodData)
     .then(response => {
       const newmoodId = response.data.moodId; // Assuming the ID is included in the response
+      const mongoID = response.data.mongoID;
       console.log(response.data.id);
+      console.log(mongoID);
       navigate(`http://localhost:3001/getmoods/${response.data.id}`);
     })
     .catch(error => {
