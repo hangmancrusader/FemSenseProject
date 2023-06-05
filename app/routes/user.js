@@ -75,7 +75,7 @@ router.post('/logout', authenticateToken,async (req, res) => {
   });
   // Sign-up endpoint
   router.post('/signupadmin', async (req, res) => {
-    const { email, password, name, roleid } = req.body;
+    const { email, password, name,roleid } = req.body;
   
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
@@ -91,7 +91,8 @@ router.post('/logout', authenticateToken,async (req, res) => {
     const newUser = new User({
       email,
       password: hashedPassword,
-      name, roleid
+      name,
+      roleid,
     });
   
     // Save the new user document to the database

@@ -24,7 +24,6 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [signupError, setSignupError] = useState("");
   const [open, setOpen] = useState(false); // Snackbar state
-  const [roleid, setRoleid] = useState(null);
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,11 +46,12 @@ function SignUp() {
     }
    
     try {
+      const roleid=2;
       const response = await axios.post("http://localhost:3000/user/signupadmin", {
         email, 
         password,
         name,
-        roleid 
+        roleid,
       })
       .then((result) => {
         console.log(result)
