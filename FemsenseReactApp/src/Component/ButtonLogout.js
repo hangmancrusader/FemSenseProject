@@ -37,6 +37,7 @@ const LogoutButton = () => {
       onClick={handleLogout}
       sx={{
         position: 'absolute',
+        left: "800px",
         right: '20px',
         top: '20px',
         textTransform: 'none',
