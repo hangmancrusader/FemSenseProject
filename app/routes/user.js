@@ -59,6 +59,7 @@ router.get('/allusers', authenticateToken, async (req, res) => {
 
     // Return the user profiles information
     const userProfiles = users.map((user) => ({
+      userid:user._id,
       username: user.name,
       email: user.email,
       phonenumber: user.phonenumber,
