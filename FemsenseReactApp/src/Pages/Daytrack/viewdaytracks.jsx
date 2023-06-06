@@ -9,7 +9,8 @@ const Viewdaytrack = () => {
     // Fetch daytracks from the backend
     const fetchDayTracks = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/daytracker/'); // Replace with your backend API endpoint
+        const userId = localStorage.getItem('userid'); // Retrieve the user ID from local storage
+        const response = await axios.get(`http://localhost:3000/daytracker/${userId}`);
         setDayTracks(response.data);
       } catch (error) {
         console.error(error);
