@@ -1,5 +1,5 @@
 import React from 'react';
-import ReminderForm from '../Component/TrackerComponent/ReminderForm';
+import ReminderForm from '../../Component/TrackerComponent/ReminderForm';
 import { Typography} from "@mui/material";
 
 const App = () => {

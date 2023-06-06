@@ -34,11 +34,50 @@ const handleErrors=(err)=>
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+
+  //deletewithparams
+  router.delete('/deleteuser/:id', async (req, res) => {
+    const userid = req.params.id
+    console.log(userid)
+    try {
+      const user = await User.findByIdAndDelete(userid);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json({ message: 'User deleted successfully' });
+    } catch (err) {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
   
+//get all user
+router.get('/allusers', authenticateToken, async (req, res) => {
+  try {
+    // Fetch all users
+    const users = await User.find();
+
+    // Return the user profiles information
+    const userProfiles = users.map((user) => ({
+      username: user.name,
+      email: user.email,
+      phonenumber: user.phonenumber,
+      dob: user.dob,
+      roleid: user.roleid,
+    }));
+
+    res.json(userProfiles);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
   // Get user profile endpoint
-router.get('/profile',authenticateToken, async (req, res) => {
-    const userid = req.body.userid;
+router.get('/profile/:id',authenticateToken, async (req, res) => {
+    const userid = req.params.id
   
     // Check if the user exists
     const user = await User.findById(userid);

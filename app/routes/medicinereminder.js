@@ -35,6 +35,22 @@ router.get(("/:reminderID"),async(req,res)=>{
     
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const reminders = await Medicinereminder.find();
+
+    if (!reminders || reminders.length === 0) {
+      return res.status(404).json({ message: "Reminders not found" });
+    }
+
+    res.status(200).json(reminders);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Unable to get reminders" });
+  }
+});
+
+
 router.delete(("/:reminderID"), async(req,res)=>{
     try{ 
         const reminder = await Medicinereminder.findOneAndRemove({"reminderID":req.params.reminderID});

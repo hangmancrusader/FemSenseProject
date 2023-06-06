@@ -32,7 +32,7 @@ const Drawer = () => {
     {
       text: "Reminders",
       icon: <EditNotificationsOutlinedIcon />,
-      onClick: () => navigate("/reminders")
+      onClick: () => navigate("/reminderoptions")
     },
     ,
     {
@@ -43,7 +43,7 @@ const Drawer = () => {
     {
       text: "Admin",
       icon: <AdminPanelSettingsOutlinedIcon />,
-      onClick: () => navigate("/contact")
+      onClick: () => navigate("/getuser")
     }
   ];
 

@@ -9,7 +9,7 @@ import Library from "./Pages/Library";
 import Contact from "./Pages/Contact";
 import Homepage from "./Pages/Homepage";
 import Rating from "./Pages/Rating";
-import Reminder from "./Pages/Reminder"
+import Reminder from "./Pages/Reminder/Reminder"
 
 //Daytrack routes
 import DayTrackOptions from "./Pages/Daytrack/daytrackoptions";
@@ -28,7 +28,15 @@ import PostSymp from "./Pages/postsymptoms";
 import PostPA from "./Pages/postPA";
 import PostNotes from "./Pages/postnotes";
 import MoodPage from "./Pages/getmoods";
-
+import UserProfile from "./Pages/Admin/getuser";
+import Adminpanel from "./Pages/Admin/adminpanel";
+import ReminderOptions from "./Pages/Reminder/Reminderoptions";
+import ViewReminder from "./Pages/Reminder/ViewReminder";
+import DeleteReminder from "./Pages/Reminder/DeleteReminder";
+import DeletedReminders from "./Pages/Reminder/DeletedReminders";
+import AdminOptions from "./Pages/Admin/adminoptions";
+import SelectUser from "./Pages/Admin/selectuser";
+import DeleteUser from "./Pages/Admin/deleteuser";
 // Example HOC for authorization
 const ProtectedRoute = ({ element: Component, ...rest }) => {
   const isAuthenticated = localStorage.getItem("jwt"); // Check if user is logged in (using JWT in local storage)
@@ -92,6 +100,16 @@ const App = () => (
       path="/postnotes" element={<ProtectedRoute element={PostNotes} />}/>
     <Route
       path="/moods/viewmoods" element={<ProtectedRoute element={MoodPage} />}/>
+    <Route path="/getuser" element = { <ProtectedRoute element={UserProfile} />} />
+    <Route path="/adminpanel"  element = {<ProtectedRoute element={Adminpanel }/>} />
+    <Route path="/reminderoptions" element = {<ProtectedRoute element={ReminderOptions }/>} />
+    <Route path="/viewreminders" element = {<ProtectedRoute element={ViewReminder }/>} />
+    <Route path="/deletereminders" element = {<ProtectedRoute element={DeleteReminder }/>} />
+    <Route path="/deletedreminder/:id" element = {<ProtectedRoute element={DeletedReminders }/>} />
+    <Route path="/adminoptions" element = {<ProtectedRoute element={AdminOptions }/>} />
+    <Route path="/selectuser" element = {<ProtectedRoute element={SelectUser }/>} />
+    <Route path="/deleteuser/:id" element = {<ProtectedRoute element={DeleteUser }/>} />
+
   </Routes>
 );
 
