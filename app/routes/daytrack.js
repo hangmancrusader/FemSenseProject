@@ -34,11 +34,11 @@ router.get('/', async (req, res) => {
 // Get a specific daytrack entry by ID
 router.get('/:id', async (req, res) => {
   try {
-    const daytrack = await DayTrack.findById(req.params.id);
-    if (!daytrack) {
-      return res.status(404).send('Daytrack not found');
+    const daytracks = await DayTrack.find({ userID: req.params.id });
+    if (daytracks.length === 0) {
+      return res.status(404).send('No day tracks found for the user');
     }
-    res.send(daytrack);
+    res.send(daytracks);
   } catch (err) {
     res.status(500).send(err);
   }
