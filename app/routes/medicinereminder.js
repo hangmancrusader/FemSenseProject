@@ -9,9 +9,9 @@ const Medicinereminder = require('../../models/medicinereminder');
 router.post(("/"), async(req,res)=>{
     
   try {
-    const {medicine, reminderID,frequency,remindertime} = req.body;
-    console.log(medicine, reminderID,frequency,remindertime);
-    const reminder = new Medicinereminder({medicine, reminderID,frequency,remindertime});
+    const {userId,medicine, reminderID,frequency,remindertime} = req.body;
+    console.log(userId,medicine, reminderID,frequency,remindertime);
+    const reminder = new Medicinereminder({userId,medicine, reminderID,frequency,remindertime});
     await reminder.save();
     res.status(201).json({ message: "Reminder created successfully",med:medicine,freq:frequency,time:remindertime });
   } catch (error) {
@@ -22,22 +22,12 @@ router.post(("/"), async(req,res)=>{
   //the other way is to divide the response of this reminder object into academind type example
 });
 
-router.get(("/:reminderID"),async(req,res)=>{
-    try {
-        const reminder = await Medicinereminder.find({"reminderID":req.params.reminderID});
-        if (!reminder) {
-          res.status(404).json({ message: "Reminder not found" });
-        }
-        res.status(200).json(reminder);
-      } catch (error) {
-        res.status(500).json({ error: "Unable to get reminder" });
-      }
-    
-});
 
-router.get("/", async (req, res) => {
+
+router.get("/:id", async (req, res) => {
   try {
-    const reminders = await Medicinereminder.find();
+    const userId = req.body.userId; // Get the userId from the request body
+    const reminders = await Medicinereminder.find({ userId: req.params.id });
 
     if (!reminders || reminders.length === 0) {
       return res.status(404).json({ message: "Reminders not found" });
@@ -48,6 +38,18 @@ router.get("/", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Unable to get reminders" });
   }
+});
+router.get(("/:reminderID"),async(req,res)=>{
+  try {
+      const reminder = await Medicinereminder.find({"reminderID":req.params.reminderID});
+      if (!reminder) {
+        res.status(404).json({ message: "Reminder not found" });
+      }
+      res.status(200).json(reminder);
+    } catch (error) {
+      res.status(500).json({ error: "Unable to get reminder" });
+    }
+  
 });
 
 

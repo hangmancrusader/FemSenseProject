@@ -11,11 +11,11 @@ const ReminderForm = () => {
       event.preventDefault();
       const uniqueID = generateUniqueID(); // Generate a unique number for reminderID
       const reminderData = {
+        userId: localStorage.getItem('userid'), // Retrieve the user ID from local storage
         medicine: medicine,
         reminderID: uniqueID,
         frequency: frequency,
         remindertime: reminderTime
-        
       };
   
       console.log(reminderData); // Log the reminder data

@@ -2,6 +2,12 @@ const  mongoose = require("mongoose");
 
 const medicinereminderSchema = mongoose.Schema(
     {
+        userId:
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'user',
+            required:  true
+        },
         medicine: {type: [String], required: true},
         reminderID: {
             type: Number, required: true, unique: true

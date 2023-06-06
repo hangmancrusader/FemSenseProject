@@ -9,7 +9,8 @@ const ViewReminder = () => {
     // Fetch daytracks from the backend
     const fetchReminders = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/medicinereminder/'); // Replace with your backend API endpoint
+        const userId = localStorage.getItem('userid'); // Retrieve the user ID from local storage
+        const response = await axios.get(`http://localhost:3000/medicinereminder/${userId}`);
         setReminders(response.data);
       } catch (error) {
         console.error(error);
