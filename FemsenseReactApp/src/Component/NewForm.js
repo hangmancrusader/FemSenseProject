@@ -499,7 +499,7 @@ const NewForm = () => {
        onClick={async () => {
          try {
            // Retrieve userId from local storage
-           const userId = localStorage.getItem('userId');
+           const userId = localStorage.getItem('userid');
      
            // Check if userId exists
            if (!userId) {
@@ -520,7 +520,7 @@ const NewForm = () => {
            });
      
            // Redirect to the tracker page
-           window.location.href = "/tracker";
+           window.location.href = "/periodtracker";
          } catch (error) {
            console.error("Error saving user preferences:", error);
          }
