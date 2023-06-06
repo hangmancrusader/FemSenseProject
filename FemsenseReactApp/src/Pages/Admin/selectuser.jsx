@@ -19,6 +19,7 @@ const SelectUser = () => {
     };
       try {
         const response = await axios.get('http://localhost:3000/user/allusers', config);
+        console.log(response.data)
         setUsers(response.data);
       } catch (error) {
         console.error(error);
